@@ -1,0 +1,47 @@
+.app {
+  max-width: 500px;
+  margin: 30px auto;
+  border: 3px solid black;
+  border-radius: 3px;
+  padding: 25px;
+}
+#greeting {
+  padding: 0px 0px 10px 0px;
+}
+.search .input {
+  font-size: 20px;
+  border: 2px solid black;
+  border-radius: 25px;
+  padding: 0px 10px;
+}
+.search .button-form {
+  font-size: 18px;
+  background: none;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 2px 8px;
+}
+.temperature-button {
+  font-size: 20px;
+  border: none;
+  background: none;
+  border-radius: 20px;
+  padding: 0px 10px;
+}
+.temperature-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+#main-city {
+  font-size: 40px;
+  margin: 15px 0px;
+}
+#main-weather-icon {
+  font-size: 100px;
+}
+#main-temperature {
+  font-size: 60px;
+}
+#current-weather-description {
+  font-size: 15px;
+}
