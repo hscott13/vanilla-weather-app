@@ -30,7 +30,7 @@
     <div class="container">
       <div class="app">
         <small id="date-and-time"></small>
-        <h3 id="greeting">Good Afternoon</h3>
+        <h3 id="greeting">Hello</h3>
         <h2>What's the weather like in...</h2>
         <form class="search" id="city-search">
           <input class="input" type="text" autofocus="on" id="city-input" />
@@ -38,14 +38,14 @@
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
-        <h1 id="main-city">Glasgow</h1>
+        <h1 id="main-city"></h1>
         <div class="container text-center forecast">
           <div class="row">
             <div class="col weather-icon-col" id="main-weather-icon">⛅</div>
             <div class="col main-weather-info">
               <div class="row">
                 <div class="col-8">
-                  <h2 id="main-temperature">5°</h2>
+                  <h2 id="main-temperature"></h2>
                 </div>
                 <div class="col temperature-controls">
                   <button class="temperature-button" id="celsius">C</button>
@@ -56,15 +56,13 @@
               <div
                 class="row current-weather-info"
                 id="main-weather-description"
-              >
-                <strong>Light Clouds</strong>
-              </div>
+              ></div>
 
               <div class="row current-weather-info">
-                <div>Clouds: <span id="main-cloud-cover">40</span>%</div>
+                <div>Humidity: <span id="main-humidity"></span>%</div>
               </div>
               <div class="row current-weather-info">
-                <div>Wind Speed: <span id="main-wind-speed">4</span>m/s</div>
+                <div>Wind Speed: <span id="main-wind-speed"></span>m/s</div>
               </div>
             </div>
           </div>
