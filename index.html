@@ -32,47 +32,45 @@
           </button>
         </form>
         <h1 id="main-city">Glasgow</h1>
-        <div class="container text-center">
+        <div class="container text-center forecast">
           <div class="row">
-            <div class="col -lg-auto" id="main-weather-icon">⛅</div>
-            <div class="col">
+            <div class="col weather-icon-col" id="main-weather-icon">⛅</div>
+            <div class="col main-weather-info">
               <div class="row">
-                <div class="col">
-                  <h2><span id="main-temperature">5°</span></h2>
+                <div class="col-8">
+                  <h2 id="main-temperature">5°</h2>
                 </div>
-                <div class="col">
+                <div class="col temperature-controls">
                   <button class="temperature-button" id="celsius">C</button>
                   |
                   <button class="temperature-button" id="fahrenheit">F</button>
                 </div>
               </div>
-
-              <ul
-                class="list-group list-group-flush"
-                id="current-weather-description"
+              <div
+                class="row current-weather-info"
+                id="main-weather-description"
               >
-                <li class="list-group-item" id="main-weather-description">
-                  <strong>Light Clouds</strong>
-                </li>
-                <li class="list-group-item">
-                  Clouds:<span id="main-cloud-cover">40</span>%
-                </li>
-                <li class="list-group-item">
-                  Wind Speed: <span id="main-wind-speed">4</span>m/s
-                </li>
-              </ul>
+                <strong>Light Clouds</strong>
+              </div>
+
+              <div class="row current-weather-info">
+                <div>Clouds: <span id="main-cloud-cover">40</span>%</div>
+              </div>
+              <div class="row current-weather-info">
+                <div>Wind Speed: <span id="main-wind-speed">4</span>m/s</div>
+              </div>
             </div>
           </div>
         </div>
-        <small
-          ><a
-            href="https://github.com/hscott13/vanilla-weather-app"
-            target="_blank"
-            >Open-soure code</a
-          >
-          by Heather Scott
-        </small>
       </div>
+      <small id="footer-link"
+        ><a
+          href="https://github.com/hscott13/vanilla-weather-app"
+          target="_blank"
+          >Open-source code</a
+        >
+        by Heather Scott
+      </small>
     </div>
 
     <script src="./src/app.js"></script>
