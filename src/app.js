@@ -1,13 +1,4 @@
 let apiKey = "0d6e6a447f07653a71842ab1529ot22b";
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
 
 function updateTime() {
   let now = new Date();
@@ -46,21 +37,14 @@ function timestampUpdate(timestamp) {
 }
 
 function dataUpdate(response, position) {
-  let currentCity = document.querySelector("#main-city");
-  let timestamp = document.querySelector("#timestamp");
-  let icon = document.querySelector("#main-weather-icon");
-  let mainTemperature = document.querySelector("#main-temperature");
-  let mainWeatherDescription = document.querySelector(
-    "#main-weather-description"
-  );
-  let mainHumidity = document.querySelector("#main-humidity");
-  let mainWindSpeed = document.querySelector("#main-wind-speed");
-  let temperature = Math.round(response.data.temperature.current);
+  celsiusTemp = response.data.temperature.current;
+  let temperature = Math.round(celsiusTemp);
   let wind = Math.round(response.data.wind.speed);
   let description = response.data.condition.description;
 
   currentCity.innerHTML = response.data.city;
   timestamp.innerHTML = timestampUpdate(response.data.time * 1000);
+  celsius.classList.add("bold");
   mainTemperature.innerHTML = `${temperature}°`;
   mainWeatherDescription.innerHTML = description;
   mainHumidity.innerHTML = response.data.temperature.humidity;
@@ -112,6 +96,37 @@ function dataUpdate(response, position) {
     icon.innerHTML = ``;
   }
 }
+function celsiusButton(event) {
+  mainTemperature.innerHTML = `${Math.round(celsiusTemp)}°`;
+  fahrenheit.classList.remove("bold");
+  celsius.classList.add("bold");
+}
+function fahrenheitButton(event) {
+  let fahrenheitTemperature = Math.round((celsiusTemp * 9) / 5 + 32);
+  mainTemperature.innerHTML = `${fahrenheitTemperature}°`;
+  fahrenheit.classList.add("bold");
+  celsius.classList.remove("bold");
+}
+
+let celsiusTemp = null;
+let days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+let currentCity = document.querySelector("#main-city");
+let timestamp = document.querySelector("#timestamp");
+let icon = document.querySelector("#main-weather-icon");
+let mainTemperature = document.querySelector("#main-temperature");
+let mainWeatherDescription = document.querySelector(
+  "#main-weather-description"
+);
+let mainHumidity = document.querySelector("#main-humidity");
+let mainWindSpeed = document.querySelector("#main-wind-speed");
 
 updateTime();
 navigator.geolocation.getCurrentPosition(currentLocation);
@@ -119,3 +134,8 @@ let searchButton = document.querySelector("#city-search");
 searchButton.addEventListener("submit", citySearch);
 let currentCityButton = document.querySelector("#current-location-button");
 currentCityButton.addEventListener("click", currentLocationButton);
+
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click", celsiusButton);
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", fahrenheitButton);

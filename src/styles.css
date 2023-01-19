@@ -83,6 +83,9 @@
   cursor: pointer;
   font-weight: bolder;
 }
+.bold {
+  font-weight: bolder;
+}
 .current-weather-info {
   font-size: 1em;
 }
