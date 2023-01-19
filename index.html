@@ -32,12 +32,15 @@
         <small id="date-and-time"></small>
         <h3 id="greeting">Hello</h3>
         <h2>What's the weather like in...</h2>
-        <form class="search" id="city-search">
-          <input class="input" type="text" autofocus="on" id="city-input" />
-          <button class="button-form" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
+        <span
+          ><form class="search" id="city-search">
+            <input class="input" type="text" autofocus="on" id="city-input" />
+            <button class="button-form" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+          <button id="current-location-button">Current Location</button>
+        </span>
         <h1 id="main-city"></h1>
         <h6>Last Updated: <span id="timestamp"></span></h6>
         <div class="container text-center forecast">

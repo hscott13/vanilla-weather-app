@@ -13,6 +13,7 @@
   margin-bottom: 18px;
   font-weight: 700;
 }
+
 .search .input {
   font-size: 1.25em;
   border: 3px solid black;
@@ -26,9 +27,15 @@
   border-radius: 20px;
   padding: 2px 8px;
 }
+#current-location-button {
+  font-size: 0.75em;
+  background: none;
+  border: none;
+  text-decoration: underline;
+}
 #main-city {
   font-size: 3.1em;
-  margin: 15px 0px 0px 0px;
+  margin: 5px 0px 0px 0px;
 }
 .forecast {
   margin: 0px;

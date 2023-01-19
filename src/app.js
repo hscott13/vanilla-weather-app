@@ -26,7 +26,16 @@ function currentLocation(position) {
   let lat = position.coords.latitude;
   let apiUrlCurrentPosition = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
   axios.get(apiUrlCurrentPosition).then(dataUpdate);
-  console.log(apiUrlCurrentPosition);
+}
+function currentLocationButton() {
+  navigator.geolocation.getCurrentPosition(currentLocation);
+}
+function citySearch(event) {
+  event.preventDefault();
+  let searchedCity = document.querySelector("#city-input");
+  let searchedCityName = searchedCity.value;
+  let apiUrlCity = `https://api.shecodes.io/weather/v1/current?query=${searchedCityName}&key=${apiKey}&units=metric`;
+  axios.get(apiUrlCity).then(dataUpdate);
 }
 function timestampUpdate(timestamp) {
   let time = new Date(timestamp);
@@ -57,24 +66,47 @@ function dataUpdate(response, position) {
   mainHumidity.innerHTML = response.data.temperature.humidity;
   mainWindSpeed.innerHTML = wind;
 
-  if (response.data.condition.description === "sky is clear") {
+  if (
+    response.data.condition.icon === "clear-sky-day" ||
+    response.data.condition.icon === "clear-sky-night"
+  ) {
     icon.innerHTML = `<i class="fa-solid fa-sun"></i>`;
-  } else if (response.data.condition.description === "few clouds") {
+  } else if (
+    response.data.condition.icon === "few clouds-day" ||
+    response.data.condition.icon === "few-clouds-night"
+  ) {
     icon.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
   } else if (
-    response.data.condition.description === "scattered clouds" ||
-    response.data.condition.description === "broken clouds"
+    response.data.condition.icon === "scattered-clouds-day" ||
+    response.data.condition.icon === "scattered-clouds-night" ||
+    response.data.condition.icon === "broken-clouds-day" ||
+    response.data.condition.icon === "broken-clouds-night"
   ) {
     icon.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
-  } else if (response.data.condition.description === "shower rain") {
+  } else if (
+    response.data.condition.icon === "shower-rain-day" ||
+    response.data.condition.icon === "shower-rain-night"
+  ) {
     icon.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
-  } else if (response.data.condition.description === "rain") {
+  } else if (
+    response.data.condition.icon === "rain-day" ||
+    response.data.condition.icon === "rain-night"
+  ) {
     icon.innerHTML = `<i class="fa-solid fa-cloud-rain"></i>`;
-  } else if (response.data.condition.description === "thunderstorm") {
+  } else if (
+    response.data.condition.icon === "thunderstorm-day" ||
+    response.data.condition.icon === "thunderstorm-night"
+  ) {
     icon.innerHTML = `<i class="fa-solid fa-cloud-bolt"></i>`;
-  } else if (response.data.condition.description === "snow") {
+  } else if (
+    response.data.condition.icon === "snow-day" ||
+    response.data.condition.icon === "snow-night"
+  ) {
     icon.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
-  } else if (response.data.condition.description === "mist") {
+  } else if (
+    response.data.condition.icon === "mist-day" ||
+    response.data.condition.icon === "mist-night"
+  ) {
     icon.innerHTML = `<i class="fa-solid fa-smog"></i>`;
   } else {
     icon.innerHTML = ``;
@@ -83,3 +115,7 @@ function dataUpdate(response, position) {
 
 updateTime();
 navigator.geolocation.getCurrentPosition(currentLocation);
+let searchButton = document.querySelector("#city-search");
+searchButton.addEventListener("submit", citySearch);
+let currentCityButton = document.querySelector("#current-location-button");
+currentCityButton.addEventListener("click", currentLocationButton);
