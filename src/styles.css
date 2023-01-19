@@ -27,8 +27,8 @@
   padding: 2px 8px;
 }
 #main-city {
-  font-size: 3.125em;
-  margin: 15px 0px;
+  font-size: 3.1em;
+  margin: 15px 0px 0px 0px;
 }
 .forecast {
   margin: 0px;
@@ -85,7 +85,6 @@
   text-transform: capitalize;
 }
 
-}
 .footer-link {
   position: absolute;
   bottom: 0;
