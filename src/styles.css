@@ -41,10 +41,11 @@
   align-items: center;
   justify-content: center;
 }
-#main-weather-icon {
-  font-size: 150px;
+.weather-icon-col {
+  font-size: 10em;
   display: flex;
   align-self: flex-end;
+  justify-content: center;
 }
 #main-weather-info {
   justify-content: center;

@@ -34,24 +34,50 @@ function timestampUpdate(timestamp) {
   let day = days[time.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
+
 function dataUpdate(response, position) {
   let currentCity = document.querySelector("#main-city");
   let timestamp = document.querySelector("#timestamp");
+  let icon = document.querySelector("#main-weather-icon");
   let mainTemperature = document.querySelector("#main-temperature");
   let mainWeatherDescription = document.querySelector(
     "#main-weather-description"
   );
   let mainHumidity = document.querySelector("#main-humidity");
   let mainWindSpeed = document.querySelector("#main-wind-speed");
-
   let temperature = Math.round(response.data.temperature.current);
   let wind = Math.round(response.data.wind.speed);
+  let description = response.data.condition.description;
+
   currentCity.innerHTML = response.data.city;
   timestamp.innerHTML = timestampUpdate(response.data.time * 1000);
   mainTemperature.innerHTML = `${temperature}°`;
-  mainWeatherDescription.innerHTML = response.data.condition.description;
+  mainWeatherDescription.innerHTML = description;
   mainHumidity.innerHTML = response.data.temperature.humidity;
   mainWindSpeed.innerHTML = wind;
+
+  if (response.data.condition.description === "sky is clear") {
+    icon.innerHTML = `<i class="fa-solid fa-sun"></i>`;
+  } else if (response.data.condition.description === "few clouds") {
+    icon.innerHTMl = `<i class="fa-solid fa-cloud-sun"></i>`;
+  } else if (
+    response.data.condition.description === "scattered clouds" ||
+    response.data.condition.description === "broken clouds"
+  ) {
+    icon.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+  } else if (response.data.condition.description === "shower rain") {
+    icon.innerHTMl = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
+  } else if (response.data.condition.description === "rain") {
+    icon.innerHTML = `<i class="fa-solid fa-cloud-rain"></i>`;
+  } else if (response.data.condition.description === "thunderstorm") {
+    icon.innerHTMl = `<i class="fa-solid fa-cloud-bolt"></i>`;
+  } else if (response.data.condition.description === "snow") {
+    icon.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
+  } else if (response.data.condition.description === "mist") {
+    icon.innerHTMl = `<i class="fa-solid fa-smog"></i>`;
+  } else {
+    icon.innerHTML = ``;
+  }
 }
 
 updateTime();
