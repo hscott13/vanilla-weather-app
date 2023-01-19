@@ -26,6 +26,7 @@ function currentLocation(position) {
   let lat = position.coords.latitude;
   let apiUrlCurrentPosition = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
   axios.get(apiUrlCurrentPosition).then(dataUpdate);
+  console.log(apiUrlCurrentPosition);
 }
 function timestampUpdate(timestamp) {
   let time = new Date(timestamp);
@@ -59,22 +60,22 @@ function dataUpdate(response, position) {
   if (response.data.condition.description === "sky is clear") {
     icon.innerHTML = `<i class="fa-solid fa-sun"></i>`;
   } else if (response.data.condition.description === "few clouds") {
-    icon.innerHTMl = `<i class="fa-solid fa-cloud-sun"></i>`;
+    icon.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
   } else if (
     response.data.condition.description === "scattered clouds" ||
     response.data.condition.description === "broken clouds"
   ) {
     icon.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
   } else if (response.data.condition.description === "shower rain") {
-    icon.innerHTMl = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
+    icon.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
   } else if (response.data.condition.description === "rain") {
     icon.innerHTML = `<i class="fa-solid fa-cloud-rain"></i>`;
   } else if (response.data.condition.description === "thunderstorm") {
-    icon.innerHTMl = `<i class="fa-solid fa-cloud-bolt"></i>`;
+    icon.innerHTML = `<i class="fa-solid fa-cloud-bolt"></i>`;
   } else if (response.data.condition.description === "snow") {
     icon.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
   } else if (response.data.condition.description === "mist") {
-    icon.innerHTMl = `<i class="fa-solid fa-smog"></i>`;
+    icon.innerHTML = `<i class="fa-solid fa-smog"></i>`;
   } else {
     icon.innerHTML = ``;
   }
