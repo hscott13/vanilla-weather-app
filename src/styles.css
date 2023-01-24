@@ -37,7 +37,7 @@
   font-size: 3.1em;
   margin: 5px 0px 0px 0px;
 }
-.forecast {
+.weather {
   margin: 0px;
 }
 .col {
@@ -96,6 +96,14 @@
   text-transform: capitalize;
 }
 
+#forecast {
+  font-size: 1.5em;
+  margin: 20px 30px;
+}
+.forecast-info {
+  display: flex;
+  justify-content: center;
+}
 .footer-link {
   position: absolute;
   bottom: 0;
