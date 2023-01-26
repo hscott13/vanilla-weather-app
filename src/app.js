@@ -56,7 +56,7 @@ function dataUpdate(response, position) {
   ) {
     icon.innerHTML = `<i class="fa-solid fa-sun"></i>`;
   } else if (
-    response.data.condition.icon === "few clouds-day" ||
+    response.data.condition.icon === "few-clouds-day" ||
     response.data.condition.icon === "few-clouds-night"
   ) {
     icon.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
@@ -95,6 +95,7 @@ function dataUpdate(response, position) {
   } else {
     icon.innerHTML = ``;
   }
+  displayForecast();
 }
 function celsiusButton(event) {
   mainTemperature.innerHTML = `${Math.round(celsiusTemp)}°`;
@@ -107,7 +108,22 @@ function fahrenheitButton(event) {
   fahrenheit.classList.add("bold");
   celsius.classList.remove("bold");
 }
-
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+            <div class="col-7">${day}</div>
+            <div class="col-2 forecast-info">
+              <i class="fa-solid fa-sun"></i>
+            </div>
+            <div class="col-2 forecast-info">5°</div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
 let celsiusTemp = null;
 let days = [
   "Sunday",

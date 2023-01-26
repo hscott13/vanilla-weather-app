@@ -96,10 +96,11 @@
   text-transform: capitalize;
 }
 
-#forecast {
+.forecast {
   font-size: 1.5em;
-  margin: 20px 30px;
+  margin: 20px 70px;
 }
+
 .forecast-info {
   display: flex;
   justify-content: center;
