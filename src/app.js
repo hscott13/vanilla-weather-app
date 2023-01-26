@@ -14,7 +14,6 @@ function updateTime() {
   updateMode(hour);
 }
 function updateMode(hour) {
-  console.log(hour);
   let background = document.querySelector("#background");
   let greeting = document.querySelector("#greeting");
   if (((hour) => 5) && hour < 12) {

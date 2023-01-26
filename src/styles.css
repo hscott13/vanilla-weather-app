@@ -38,7 +38,7 @@
 .app {
   border: 3px solid white;
   border-radius: 5px;
-  padding: 25px;
+  padding: 20px;
 }
 #date-and-time {
   font-size: 1em;
@@ -75,7 +75,7 @@
   text-decoration: underline;
 }
 #main-city {
-  font-size: 3.1em;
+  font-size: 2.25em;
   margin: 5px 0px 0px 0px;
 }
 .weather {
@@ -102,7 +102,7 @@
 }
 #main-temperature {
   display: flex;
-  font-size: 5em;
+  font-size: 4.5em;
 
   margin: 0px;
   justify-content: flex-end;
