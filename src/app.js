@@ -27,7 +27,7 @@ function updateMode(hour) {
     greeting.innerHTML = "Good Evening";
   } else {
     background.classList.add("night");
-    greeting.innerHTML = "Good Evening";
+    greeting.innerHTML = "Good Night";
   }
 }
 function currentLocation(position) {
