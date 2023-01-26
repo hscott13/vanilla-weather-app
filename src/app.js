@@ -53,63 +53,55 @@ function dataUpdate(response, position) {
   mainWeatherDescription.innerHTML = description;
   mainHumidity.innerHTML = response.data.temperature.humidity;
   mainWindSpeed.innerHTML = wind;
+  icon.innerHTML = iconSelect(response);
+}
 
+function iconSelect(response) {
   if (
     response.data.condition.icon === "clear-sky-day" ||
     response.data.condition.icon === "clear-sky-night"
   ) {
-    icon.innerHTML = `<i class="fa-solid fa-sun"></i>`;
+    return `<i class="fa-solid fa-sun"></i>`;
   } else if (
     response.data.condition.icon === "few-clouds-day" ||
     response.data.condition.icon === "few-clouds-night"
   ) {
-    icon.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
+    return `<i class="fa-solid fa-cloud-sun"></i>`;
   } else if (
     response.data.condition.icon === "scattered-clouds-day" ||
     response.data.condition.icon === "scattered-clouds-night" ||
     response.data.condition.icon === "broken-clouds-day" ||
     response.data.condition.icon === "broken-clouds-night"
   ) {
-    icon.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+    return `<i class="fa-solid fa-cloud"></i>`;
   } else if (
     response.data.condition.icon === "shower-rain-day" ||
     response.data.condition.icon === "shower-rain-night"
   ) {
-    icon.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
+    return `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
   } else if (
     response.data.condition.icon === "rain-day" ||
     response.data.condition.icon === "rain-night"
   ) {
-    icon.innerHTML = `<i class="fa-solid fa-cloud-rain"></i>`;
+    return `<i class="fa-solid fa-cloud-rain"></i>`;
   } else if (
     response.data.condition.icon === "thunderstorm-day" ||
     response.data.condition.icon === "thunderstorm-night"
   ) {
-    icon.innerHTML = `<i class="fa-solid fa-cloud-bolt"></i>`;
+    return `<i class="fa-solid fa-cloud-bolt"></i>`;
   } else if (
     response.data.condition.icon === "snow-day" ||
     response.data.condition.icon === "snow-night"
   ) {
-    icon.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
+    return `<i class="fa-regular fa-snowflake"></i>`;
   } else if (
     response.data.condition.icon === "mist-day" ||
     response.data.condition.icon === "mist-night"
   ) {
-    icon.innerHTML = `<i class="fa-solid fa-smog"></i>`;
+    return `<i class="fa-solid fa-smog"></i>`;
   } else {
-    icon.innerHTML = ``;
+    return ``;
   }
-}
-function celsiusButton(event) {
-  mainTemperature.innerHTML = `${Math.round(celsiusTemp)}°`;
-  fahrenheit.classList.remove("bold");
-  celsius.classList.add("bold");
-}
-function fahrenheitButton(event) {
-  let fahrenheitTemperature = Math.round((celsiusTemp * 9) / 5 + 32);
-  mainTemperature.innerHTML = `${fahrenheitTemperature}°`;
-  fahrenheit.classList.add("bold");
-  celsius.classList.remove("bold");
 }
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
@@ -127,6 +119,19 @@ function displayForecast(response) {
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
+
+function celsiusButton(event) {
+  mainTemperature.innerHTML = `${Math.round(celsiusTemp)}°`;
+  fahrenheit.classList.remove("bold");
+  celsius.classList.add("bold");
+}
+function fahrenheitButton(event) {
+  let fahrenheitTemperature = Math.round((celsiusTemp * 9) / 5 + 32);
+  mainTemperature.innerHTML = `${fahrenheitTemperature}°`;
+  fahrenheit.classList.add("bold");
+  celsius.classList.remove("bold");
+}
+
 let celsiusTemp = null;
 let days = [
   "Sunday",
