@@ -16,7 +16,9 @@ function currentLocation(position) {
   let lon = position.coords.longitude;
   let lat = position.coords.latitude;
   let apiUrlCurrentPosition = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
+  let apiUrlCurrentPositionForecast = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
   axios.get(apiUrlCurrentPosition).then(dataUpdate);
+  axios.get(apiUrlCurrentPositionForecast).then(displayForecast);
 }
 function currentLocationButton() {
   navigator.geolocation.getCurrentPosition(currentLocation);
@@ -26,7 +28,9 @@ function citySearch(event) {
   let searchedCity = document.querySelector("#city-input");
   let searchedCityName = searchedCity.value;
   let apiUrlCity = `https://api.shecodes.io/weather/v1/current?query=${searchedCityName}&key=${apiKey}&units=metric`;
+  let apiUrlCityForecast = `https://api.shecodes.io/weather/v1/forecast?query=${searchedCityName}&key=${apiKey}&units=metric`;
   axios.get(apiUrlCity).then(dataUpdate);
+  axios.get(apiUrlCityForecast).then(displayForecast);
 }
 function timestampUpdate(timestamp) {
   let time = new Date(timestamp);
@@ -95,7 +99,6 @@ function dataUpdate(response, position) {
   } else {
     icon.innerHTML = ``;
   }
-  displayForecast();
 }
 function celsiusButton(event) {
   mainTemperature.innerHTML = `${Math.round(celsiusTemp)}°`;
@@ -108,7 +111,7 @@ function fahrenheitButton(event) {
   fahrenheit.classList.add("bold");
   celsius.classList.remove("bold");
 }
-function displayForecast() {
+function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
   days.forEach(function (day) {
