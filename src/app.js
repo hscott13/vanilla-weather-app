@@ -10,8 +10,9 @@ function updateTime() {
   let month2digit = (month < 10 ? "0" : "") + month;
   let year = now.getFullYear();
   let currentDate = document.querySelector("#date-and-time");
-  currentDate.innerHTML = `${hour}:${minutes} ${weekday} ${day}/${month2digit}/${year}`;
+  currentDate.innerHTML = `${hour}:${minutes} <strong>${weekday}</strong> ${day}/${month2digit}/${year}`;
 }
+
 function currentLocation(position) {
   let lon = position.coords.longitude;
   let lat = position.coords.latitude;
@@ -32,13 +33,6 @@ function citySearch(event) {
   axios.get(apiUrlCity).then(dataUpdate);
   axios.get(apiUrlCityForecast).then(displayForecast);
 }
-function timestampUpdate(timestamp) {
-  let time = new Date(timestamp);
-  let hours = (time.getHours() < 10 ? "0" : "") + time.getHours();
-  let minutes = (time.getMinutes() < 10 ? "0" : "") + time.getMinutes();
-  let day = days[time.getDay()];
-  return `${day} ${hours}:${minutes}`;
-}
 
 function dataUpdate(response, position) {
   celsiusTemp = response.data.temperature.current;
@@ -53,71 +47,81 @@ function dataUpdate(response, position) {
   mainWeatherDescription.innerHTML = description;
   mainHumidity.innerHTML = response.data.temperature.humidity;
   mainWindSpeed.innerHTML = wind;
-  icon.innerHTML = iconSelect(response);
+  icon.innerHTML = iconSelect(response.data.condition.icon);
 }
 
-function iconSelect(response) {
-  if (
-    response.data.condition.icon === "clear-sky-day" ||
-    response.data.condition.icon === "clear-sky-night"
-  ) {
+function displayForecast(response) {
+  forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index > 0) {
+      forecastHTML =
+        forecastHTML +
+        `
+            <div class="col-7">${formatDay(forecastDay.time)}</div>
+            <div class="col-2 forecast-info">
+              ${iconSelect(forecastDay.condition.icon)}
+            </div>
+            <div class="col-2 forecast-info">${Math.round(
+              forecastDay.temperature.day
+            )}°</div>`;
+    }
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function timestampUpdate(timestamp) {
+  let time = new Date(timestamp);
+  let hours = (time.getHours() < 10 ? "0" : "") + time.getHours();
+  let minutes = (time.getMinutes() < 10 ? "0" : "") + time.getMinutes();
+  let day = days[time.getDay()];
+  return `${day} ${hours}:${minutes}`;
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+
+  return days[day];
+}
+
+function iconSelect(currentIcon) {
+  if (currentIcon === "clear-sky-day" || currentIcon === "clear-sky-night") {
     return `<i class="fa-solid fa-sun"></i>`;
   } else if (
-    response.data.condition.icon === "few-clouds-day" ||
-    response.data.condition.icon === "few-clouds-night"
+    currentIcon === "few-clouds-day" ||
+    currentIcon === "few-clouds-night"
   ) {
     return `<i class="fa-solid fa-cloud-sun"></i>`;
   } else if (
-    response.data.condition.icon === "scattered-clouds-day" ||
-    response.data.condition.icon === "scattered-clouds-night" ||
-    response.data.condition.icon === "broken-clouds-day" ||
-    response.data.condition.icon === "broken-clouds-night"
+    currentIcon === "scattered-clouds-day" ||
+    currentIcon === "scattered-clouds-night" ||
+    currentIcon === "broken-clouds-day" ||
+    currentIcon === "broken-clouds-night"
   ) {
     return `<i class="fa-solid fa-cloud"></i>`;
   } else if (
-    response.data.condition.icon === "shower-rain-day" ||
-    response.data.condition.icon === "shower-rain-night"
+    currentIcon === "shower-rain-day" ||
+    currentIcon === "shower-rain-night"
   ) {
     return `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
-  } else if (
-    response.data.condition.icon === "rain-day" ||
-    response.data.condition.icon === "rain-night"
-  ) {
+  } else if (currentIcon === "rain-day" || currentIcon === "rain-night") {
     return `<i class="fa-solid fa-cloud-rain"></i>`;
   } else if (
-    response.data.condition.icon === "thunderstorm-day" ||
-    response.data.condition.icon === "thunderstorm-night"
+    currentIcon === "thunderstorm-day" ||
+    currentIcon === "thunderstorm-night"
   ) {
     return `<i class="fa-solid fa-cloud-bolt"></i>`;
-  } else if (
-    response.data.condition.icon === "snow-day" ||
-    response.data.condition.icon === "snow-night"
-  ) {
+  } else if (currentIcon === "snow-day" || currentIcon === "snow-night") {
     return `<i class="fa-regular fa-snowflake"></i>`;
-  } else if (
-    response.data.condition.icon === "mist-day" ||
-    response.data.condition.icon === "mist-night"
-  ) {
+  } else if (currentIcon === "mist-day" || currentIcon === "mist-night") {
     return `<i class="fa-solid fa-smog"></i>`;
   } else {
     return ``;
   }
-}
-function displayForecast(response) {
-  let forecastElement = document.querySelector("#forecast");
-  let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-            <div class="col-7">${day}</div>
-            <div class="col-2 forecast-info">
-              <i class="fa-solid fa-sun"></i>
-            </div>
-            <div class="col-2 forecast-info">5°</div>`;
-  });
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
 }
 
 function celsiusButton(event) {
