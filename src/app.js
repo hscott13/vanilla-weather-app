@@ -11,8 +11,26 @@ function updateTime() {
   let year = now.getFullYear();
   let currentDate = document.querySelector("#date-and-time");
   currentDate.innerHTML = `${hour}:${minutes} <strong>${weekday}</strong> ${day}/${month2digit}/${year}`;
+  updateMode(hour);
 }
-
+function updateMode(hour) {
+  console.log(hour);
+  let background = document.querySelector("#background");
+  let greeting = document.querySelector("#greeting");
+  if (((hour) => 5) && hour < 12) {
+    background.classList.add("morning");
+    greeting.innerHTML = "Good Morning";
+  } else if (((hour) => 12) && hour < 17) {
+    background.classList.add("afternoon");
+    greeting.innerHTML = "Good Afternoon";
+  } else if (((hour) => 17) && hour < 21) {
+    background.classList.add("evening");
+    greeting.innerHTML = "Good Evening";
+  } else {
+    background.classList.add("night");
+    greeting.innerHTML = "Good Evening";
+  }
+}
 function currentLocation(position) {
   let lon = position.coords.longitude;
   let lat = position.coords.latitude;
