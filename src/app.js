@@ -51,7 +51,7 @@ function citySearch(event) {
   axios.get(apiUrlCityForecast).then(displayForecast);
 }
 
-function dataUpdate(response, position) {
+function dataUpdate(response) {
   celsiusTemp = response.data.temperature.current;
   let temperature = Math.round(celsiusTemp);
   let wind = Math.round(response.data.wind.speed);
